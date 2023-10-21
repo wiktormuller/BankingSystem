@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "NsY2Z6ntvfeZehD0Qswdi3v2en7tWQ3grkIqiNBwtyIkWa8QMMJBgjMGOltyMIb2eSnaZ1e/GVfIsjBUFdIGMg==",
+  "dgSpecHash": "H7QfD0LwRBLNMJlR6Fgv4lFkXNSWZI1kZ+7sRg+4/VpvuqCL+Ct238/rIrzUtr0iKnr6fN2xRADu/nsevosMHA==",
   "success": true,
   "projectFilePath": "C:\\Users\\bizne\\Desktop\\BankingSystem\\BankingSystem\\BankingSystem\\BankingSystem.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\bizne\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\bizne\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\bizne\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.9\\microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512",
     "C:\\Users\\bizne\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\bizne\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\bizne\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\bizne\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\bizne\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
