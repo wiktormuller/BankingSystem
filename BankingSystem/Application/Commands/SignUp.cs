@@ -1,4 +1,6 @@
-﻿namespace BankingSystem.Application.Commands
+﻿using MediatR;
+
+namespace BankingSystem.Application.Commands
 {
-    public record SignUp(string Email, string Password);
+    public record SignUp(string Email, string Password) : IRequest;
 }
