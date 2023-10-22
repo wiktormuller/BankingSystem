@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server
+    user: root
+    ports:
+      - "1433:1433"
+    networks:
+      - bankingsystemnetwork
+    environment:
+      SA_PASSWORD: Password123
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sqlserver:/var/opt/mssql/data
+
+  banking-system:
+    image: bankingsystem:latest
+    container_name: bankingsystem
+    ports:
+      - 5000:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+    networks:
+      - bankingsystemnetwork
+    depends_on:
+      - sql-server-db
+
+volumes:
+  sqlserver:
+    driver: local
+
+networks:
+  bankingbetwork:
+    name: banking-network
