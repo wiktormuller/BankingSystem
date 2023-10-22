@@ -20,7 +20,7 @@ namespace BankingSystem.Application.Commands.Handlers
         public async Task Handle(AddFunds command, CancellationToken cancellationToken)
         {
             var bankingAccount = await _bankingAccountRepository.GetAsync(command.BankingAccountId) 
-                ?? throw new BankingAccountNotFound(command.BankingAccountId);
+                ?? throw new BankingAccountNotFoundException(command.BankingAccountId);
 
             bankingAccount.AddFunds(Guid.NewGuid(), command.Amount, _clock.CurrentDate());
             await _bankingAccountRepository.UpdateAsync(bankingAccount);

@@ -2,6 +2,7 @@
 using BankingSystem.Core.Repositories;
 using BankingSystem.Infrastructure.Contexts;
 using BankingSystem.Infrastructure.Initializers;
+using BankingSystem.Infrastructure.Middleware;
 using BankingSystem.Infrastructure.Options;
 using BankingSystem.Infrastructure.Repositories;
 using BankingSystem.Infrastructure.Services;
@@ -23,6 +24,9 @@ namespace BankingSystem.Infrastructure
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBankingAccountRepository, BankingAccountRepository>();
+
+            services.AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
+            services.AddScoped<ErrorHandlerMiddleware>();
 
             services.AddSingleton<IClock, Clock>();
             services.AddSingleton<IPasswordService, PasswordService>();
