@@ -1,4 +1,5 @@
-﻿using BankingSystem.Application.Services;
+﻿using BankingSystem.Application.Exceptions;
+using BankingSystem.Application.Services;
 using BankingSystem.Core.Entities;
 using BankingSystem.Core.Repositories;
 using MediatR;
@@ -19,6 +20,13 @@ namespace BankingSystem.Application.Commands.Handlers
 
         public async Task<Guid> Handle(AddBankingAccount command, CancellationToken cancellationToken)
         {
+            var existingBankingAccount = await _bankingAccountRepository.GetAsync(command.Name);
+
+            if (existingBankingAccount is not null)
+            {
+                throw new BankingAccountAlreadyExistsException(command.Name);
+            }
+
             var bankingAccount = 
                 new BankingAccount(Guid.NewGuid(), command.UserId, command.Name, _clock.CurrentDate());
 

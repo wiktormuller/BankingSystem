@@ -31,6 +31,9 @@ namespace BankingSystem.Infrastructure.Configuration
 
             builder.HasIndex(ba => ba.UserId);
 
+            builder.HasIndex(ba => ba.Name)
+                .IsUnique();
+
             builder.HasOne<User>()
                 .WithMany()
                 .HasForeignKey(ba => ba.UserId);

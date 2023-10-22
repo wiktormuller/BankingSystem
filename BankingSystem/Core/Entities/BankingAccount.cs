@@ -8,9 +8,15 @@ namespace BankingSystem.Core.Entities
         public Guid UserId { get; private set; }
         public string Name { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public IEnumerable<Transfer> Transfers => _transfers;
+        public IEnumerable<Transfer> Transfers
+        {
+            get => _transfers;
+            set => _transfers = new HashSet<Transfer>(value);
+        }
 
         private HashSet<Transfer> _transfers = new();
+
+        private BankingAccount() { }
 
         public BankingAccount(Guid id, Guid userId, string name, DateTime createdAt)
         {

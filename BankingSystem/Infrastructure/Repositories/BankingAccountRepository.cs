@@ -19,18 +19,21 @@ namespace BankingSystem.Infrastructure.Repositories
         public Task<BankingAccount?> GetAsync(Guid id)
             => _bankingAccounts
                 .Include(x => x.Transfers)
-                .SingleOrDefaultAsync(x => x.Id.Equals(id));
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+        public Task<BankingAccount?> GetAsync(string name)
+            => _bankingAccounts
+                .Include(x => x.Transfers)
+                .SingleOrDefaultAsync(x => x.Name == name);
 
         public async Task AddAsync(BankingAccount bankingAccount)
         {
             await _bankingAccounts.AddAsync(bankingAccount);
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(BankingAccount bankingAccount)
         {
             _bankingAccounts.Update(bankingAccount);
-            await _context.SaveChangesAsync();
         }
     }
 }

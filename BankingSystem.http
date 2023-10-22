@@ -25,3 +25,51 @@ Content-Type: application/json
 ###
 GET {{url}}/users/me
 Authorization: Bearer {{accessToken}}
+
+###
+# @name bankingaccounts
+POST {{url}}/bankingaccounts
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "SavingsAccount"
+}
+
+###
+@bankingAccountId = {{bankingaccounts.response.headers.location}}
+
+###
+GET {{url}}/bankingaccounts/2174d41d-91d6-4c26-8008-d83865e76476
+Authorization: Bearer {{accessToken}}
+
+###
+POST {{url}}/funds
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "bankingAccountId": "2174d41d-91d6-4c26-8008-d83865e76476",
+  "amount": 100
+}
+
+###
+PUT {{url}}/funds
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "bankingAccountId": "2174d41d-91d6-4c26-8008-d83865e76476",
+  "amount": 50
+}
+
+###
+POST {{url}}/funds/transfers
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "fromBankingAccountId": "2174d41d-91d6-4c26-8008-d83865e76476",
+  "toBankingAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "amount": 25
+}

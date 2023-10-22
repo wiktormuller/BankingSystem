@@ -37,7 +37,7 @@ namespace BankingSystem.API.Controllers
             return NoContent();
         }
 
-        [HttpPost("transfer")]
+        [HttpPost("transfers")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

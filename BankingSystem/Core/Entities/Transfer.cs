@@ -9,6 +9,10 @@
         public TransferDirection Direction { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
+        private Transfer()
+        {
+        }
+
         private Transfer(Guid id, Guid bankingAccountId, decimal amount, TransferDirection direction, 
             DateTime createdAt, Guid? correlationTransferId = null)
         {
@@ -18,7 +22,6 @@
             Direction = direction;
             CreatedAt = createdAt;
             CorrelationTransferId = correlationTransferId;
-
         }
 
         public static Transfer Incoming(Guid id, Guid bankingAccountId, decimal amount,

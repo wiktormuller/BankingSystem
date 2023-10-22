@@ -1,4 +1,7 @@
-﻿namespace BankingSystem.Application.Queries
+﻿using BankingSystem.Application.Contracts.Responses;
+using MediatR;
+
+namespace BankingSystem.Application.Queries
 {
-    public record GetBankingAccount(Guid BankingAccountId);
+    public record GetBankingAccount(Guid BankingAccountId) : IRequest<BankingAccountResponse>;
 }
