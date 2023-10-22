@@ -31,9 +31,10 @@ namespace BankingSystem.Infrastructure.Repositories
             return await _users.SingleOrDefaultAsync(x => x.Email == email);
         }
 
-        public async Task UpdateAsync(User user)
+        public Task UpdateAsync(User user)
         {
             _users.Update(user);
+            return Task.CompletedTask;
         }
     }
 }
