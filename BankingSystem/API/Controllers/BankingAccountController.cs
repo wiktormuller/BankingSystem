@@ -21,9 +21,9 @@ namespace BankingSystem.API.Controllers
         [HttpGet("{backingAccountId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<BankingAccountResponse>> Get(Guid backingAccountId)
+        public async Task<ActionResult<BankingAccountResponse>> Get([FromQuery] Guid id)
         {
-            var bankingAccount = await _mediator.Send(new GetBankingAccount(backingAccountId));
+            var bankingAccount = await _mediator.Send(new GetBankingAccount(id));
             if (bankingAccount is not null)
             {
                 return Ok(bankingAccount);

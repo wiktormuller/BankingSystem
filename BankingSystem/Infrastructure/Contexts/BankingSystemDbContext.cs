@@ -4,17 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankingSystem.Infrastructure.Contexts
 {
-    public class UsersDbContext : DbContext
+    public class BankingSystemDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<BankingAccount> BankingAccounts { get; set; }
 
-        public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
+        public BankingSystemDbContext(DbContextOptions<BankingSystemDbContext> options) : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsersConfiguration());
+            modelBuilder.ApplyConfiguration(new BankingAccountsConfiguration());
+            modelBuilder.ApplyConfiguration(new TransferConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

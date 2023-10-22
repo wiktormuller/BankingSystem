@@ -11,7 +11,7 @@ namespace BankingSystem.Infrastructure.Queries.Handlers
     {
         private readonly DbSet<User> _users;
 
-        public GetUserMeHandler(UsersDbContext dbContext)
+        public GetUserMeHandler(BankingSystemDbContext dbContext)
         {
             _users = dbContext.Users;
         }

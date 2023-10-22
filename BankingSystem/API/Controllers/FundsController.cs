@@ -25,7 +25,7 @@ namespace BankingSystem.API.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(WithdrawFundsRequest request)

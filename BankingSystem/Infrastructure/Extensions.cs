@@ -17,13 +17,14 @@ namespace BankingSystem.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBankingAccountRepository, BankingAccountRepository>();
 
             services.AddSingleton<IClock, Clock>();
             services.AddSingleton<IPasswordService, PasswordService>();
             services.AddSingleton<IJwtService, JwtService>();
             services.AddSingleton<IPasswordHasher<PasswordService>, PasswordHasher<PasswordService>>();
 
-            services.AddDbContext<UsersDbContext>(opt => 
+            services.AddDbContext<BankingSystemDbContext>(opt => 
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 

@@ -7,10 +7,10 @@ namespace BankingSystem.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly UsersDbContext _dbContext;
+        private readonly BankingSystemDbContext _dbContext;
         private readonly DbSet<User> _users;
 
-        public UserRepository(UsersDbContext dbContext)
+        public UserRepository(BankingSystemDbContext dbContext)
         {
             _dbContext = dbContext;
             _users = dbContext.Users;
