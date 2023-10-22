@@ -37,7 +37,8 @@ namespace BankingSystem.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(AddBankingAccountRequest request)
         {
-            var bankingAccountId = await _mediator.Send(new AddBankingAccount(request.Name));
+            var userId = Guid.Parse(User.Identity?.Name); // TODO: It could be taken from IContext
+            var bankingAccountId = await _mediator.Send(new AddBankingAccount(request.Name, userId));
             return CreatedAtAction(nameof(Get), new { BankingAccountId = bankingAccountId }, null);
         }
     }

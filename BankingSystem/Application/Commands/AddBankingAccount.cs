@@ -1,4 +1,6 @@
-﻿namespace BankingSystem.Application.Commands
+﻿using MediatR;
+
+namespace BankingSystem.Application.Commands
 {
-    public record AddBankingAccount(string Name);
+    public record AddBankingAccount(string Name, Guid UserId) : IRequest<Guid>;
 }
