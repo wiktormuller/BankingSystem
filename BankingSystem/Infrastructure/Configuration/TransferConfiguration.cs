@@ -19,6 +19,7 @@ namespace BankingSystem.Infrastructure.Configuration
                 .IsRequired();
 
             builder.Property(x => x.Amount)
+                .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
             builder.Property(x => x.CreatedAt)

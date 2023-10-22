@@ -10,11 +10,13 @@
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public User(Guid id, string email, string role, string passwordHash, DateTime createdAt, DateTime updatedAt) // TODO: Refactor to value objects with domain validation
+        public User(Guid id, string email, string role, bool isActive, string passwordHash, DateTime createdAt, DateTime updatedAt) // TODO: Refactor to value objects with domain validation
         {
             Id = id;
             Email = email;
             PasswordHash = passwordHash;
+            Role = role;
+            IsActive = isActive;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
         }

@@ -3,6 +3,7 @@ using BankingSystem.Application.Contracts.Requests;
 using BankingSystem.Application.Contracts.Responses;
 using BankingSystem.Application.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingSystem.API.Controllers
@@ -18,7 +19,8 @@ namespace BankingSystem.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{backingAccountId:guid}")]
+        [HttpGet("{id:guid}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BankingAccountResponse>> Get([FromQuery] Guid id)
@@ -33,6 +35,7 @@ namespace BankingSystem.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(AddBankingAccountRequest request)

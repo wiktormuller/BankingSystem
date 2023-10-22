@@ -1,9 +1,11 @@
 ﻿using BankingSystem.Application.Services;
 using BankingSystem.Core.Repositories;
 using BankingSystem.Infrastructure.Contexts;
+using BankingSystem.Infrastructure.Initializers;
 using BankingSystem.Infrastructure.Options;
 using BankingSystem.Infrastructure.Repositories;
 using BankingSystem.Infrastructure.Services;
+using BankingSystem.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,9 @@ namespace BankingSystem.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddMediatR(configuration
+                => configuration.RegisterServicesFromAssemblyContaining<Program>());
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBankingAccountRepository, BankingAccountRepository>();
 
@@ -24,10 +29,13 @@ namespace BankingSystem.Infrastructure
             services.AddSingleton<IJwtService, JwtService>();
             services.AddSingleton<IPasswordHasher<PasswordService>, PasswordHasher<PasswordService>>();
 
+            services.AddUnitOfWork<BankingSystemUnitOfWork>();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<BankingSystemDbContext>(opt => 
-                opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                opt.UseSqlServer(connectionString));
 
-
+            services.AddHostedService<DbContextAppInitializer>();
 
             var options = services.GetOptions<AuthOptions>("auth");
             services.AddSingleton(options);

@@ -34,7 +34,7 @@ namespace BankingSystem.Application.Commands.Handlers
             var role = Role.CreateUser().Value;
             var now = _clock.CurrentDate();
 
-            var user = new User(Guid.NewGuid(), command.Email, role, passwordHash, now, now);
+            var user = new User(Guid.NewGuid(), command.Email, role, true, passwordHash, now, now);
 
             await _userRepository.AddAsync(user);
         }

@@ -1,6 +1,7 @@
 ﻿using BankingSystem.Application.Commands;
 using BankingSystem.Application.Contracts.Requests;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingSystem.API.Controllers
@@ -17,6 +18,7 @@ namespace BankingSystem.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(AddFundsRequest request)
@@ -26,6 +28,7 @@ namespace BankingSystem.API.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(WithdrawFundsRequest request)
@@ -35,6 +38,7 @@ namespace BankingSystem.API.Controllers
         }
 
         [HttpPost("transfer")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(TransferFundsRequest request)

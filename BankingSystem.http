@@ -1,0 +1,27 @@
+@url = https://localhost:7101
+
+###
+POST {{url}}/users/sign-up
+Content-Type: application/json
+
+{
+  "email": "user1@email.com",
+  "password": "Password123!"
+}
+
+###
+# @name sign_in
+POST {{url}}/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "user1@email.com",
+    "password": "Password123!"
+}
+
+###
+@accessToken = {{sign_in.response.body.$.accessToken}}
+
+###
+GET {{url}}/users/me
+Authorization: Bearer {{accessToken}}
