@@ -22,9 +22,7 @@ namespace BankingSystem.Infrastructure.Configuration
                .IsRequired();
 
             builder.Property(ba => ba.Version)
-                .IsRequired();
-
-            builder.Property(ba => ba.Version)
+                .IsRequired()
                 .IsConcurrencyToken(); // Optimistic concurrency to protect the model from concurrent modifications
 
             builder.HasIndex(ba => ba.Id);

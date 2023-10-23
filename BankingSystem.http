@@ -70,6 +70,6 @@ Authorization: Bearer {{accessToken}}
 
 {
   "fromBankingAccountId": "2174d41d-91d6-4c26-8008-d83865e76476",
-  "toBankingAccountId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "toBankingAccountId": "70a1e483-cfe1-458f-a59d-8413c46d1d19",
   "amount": 25
 }

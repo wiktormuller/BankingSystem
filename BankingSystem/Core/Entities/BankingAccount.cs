@@ -1,4 +1,6 @@
-﻿using BankingSystem.Core.Exceptions;
+﻿using BankingSystem.Core.Events;
+using BankingSystem.Core.Exceptions;
+using BankingSystem.Shared;
 
 namespace BankingSystem.Core.Entities
 {
@@ -33,9 +35,9 @@ namespace BankingSystem.Core.Entities
                 throw new InvalidTransferAmountException(amount);
             }
 
-            var transfer = Transfer.Incoming(transferId, Id, amount, createdAt);
+            var transfer = Transfer.Incoming(transferId, Id, amount, createdAt, correlationTransferId);
             _transfers.Add(transfer);
-            IncrementVersion();
+            AddEvent(new FundsAdded(this, transfer));
 
             return transfer;
         }
@@ -52,9 +54,9 @@ namespace BankingSystem.Core.Entities
                 throw new InsufficientWalletFundsException(Id);
             }
 
-            var transfer = Transfer.Outgoing(transferId, Id, amount, createdAt);
+            var transfer = Transfer.Outgoing(transferId, Id, amount, createdAt, correlationTransferId);
             _transfers.Add(transfer);
-            IncrementVersion();
+            AddEvent(new FundsWithdrawed(this, transfer));
 
             return transfer;
         }

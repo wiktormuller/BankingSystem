@@ -1,4 +1,5 @@
 ﻿using BankingSystem.Core.Entities;
+using BankingSystem.Core.Events;
 using BankingSystem.Core.Repositories;
 using BankingSystem.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -31,8 +32,27 @@ namespace BankingSystem.Infrastructure.Repositories
             await _bankingAccounts.AddAsync(bankingAccount);
         }
 
-        public async Task UpdateAsync(BankingAccount bankingAccount)
+        public void Update(BankingAccount bankingAccount)
         {
+            var incomingTransfers = bankingAccount.Events
+                .OfType<FundsAdded>()
+                .Select(fa => fa.Transfer);
+
+            foreach (var incomingTransfer in incomingTransfers)
+            {
+                _context.Entry(incomingTransfer).State = EntityState.Added;
+            }
+
+            var outgoingTransfers = bankingAccount.Events
+                .OfType<FundsWithdrawed>()
+                .Select(fw => fw.Transfer);
+
+            foreach (var outgoingTransfer in outgoingTransfers)
+            {
+                _context.Entry(outgoingTransfer).State = EntityState.Added;
+            }
+
+            _context.ChangeTracker.DetectChanges();
             _bankingAccounts.Update(bankingAccount);
         }
     }

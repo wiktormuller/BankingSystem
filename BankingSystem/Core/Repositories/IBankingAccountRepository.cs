@@ -7,6 +7,6 @@ namespace BankingSystem.Core.Repositories
         Task<BankingAccount?> GetAsync(Guid id);
         Task<BankingAccount?> GetAsync(string name);
         Task AddAsync(BankingAccount wallet);
-        Task UpdateAsync(BankingAccount wallet);
+        void Update(BankingAccount wallet);
     }
 }

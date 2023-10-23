@@ -23,7 +23,9 @@ namespace BankingSystem.Application.Commands.Handlers
                 ?? throw new BankingAccountNotFoundException(command.BankingAccountId);
 
             bankingAccount.WithdrawFunds(Guid.NewGuid(), command.Amount, _clock.CurrentDate());
-            await _bankingAccountRepository.UpdateAsync(bankingAccount);
+            // We are removing entity here, but calling Update on our ORM which cause problems (Db update concurrency exception)
+            // We want to remove Transfer, not update it
+            _bankingAccountRepository.Update(bankingAccount);
         }
     }
 }

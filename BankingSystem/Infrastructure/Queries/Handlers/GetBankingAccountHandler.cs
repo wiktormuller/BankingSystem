@@ -21,7 +21,7 @@ namespace BankingSystem.Infrastructure.Queries.Handlers
             if (bankingAccount is not null)
             {
                 var transfers = bankingAccount.Transfers.Select(x
-                    => new TransferResponse(x.Id, x.Direction.ToString().ToLowerInvariant(), x.BankingAccountId, x.Amount, x.CreatedAt))
+                    => new TransferResponse(x.Id, x.Direction.ToString().ToLowerInvariant(), x.BankingAccountId, x.Amount, x.CreatedAt, x.CorrelationTransferId))
                 .OrderByDescending(x => x.CreatedAt)
                 .ToList();
 

@@ -10,6 +10,7 @@ namespace BankingSystem.Infrastructure.UnitOfWork
             services.AddScoped<IUnitOfWork, T>();
 
             services.Decorate(typeof(IRequestHandler<>), typeof(TransactionalCommandHandlerDecorator<>));
+            services.Decorate(typeof(IRequestHandler<,>), typeof(TransactionalCommandHandlerWithResultDecorator<,>));
 
             return services;
         }

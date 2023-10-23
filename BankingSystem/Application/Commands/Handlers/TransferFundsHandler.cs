@@ -2,7 +2,6 @@
 using BankingSystem.Application.Services;
 using BankingSystem.Core.Repositories;
 using MediatR;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BankingSystem.Application.Commands.Handlers
 {
@@ -21,18 +20,16 @@ namespace BankingSystem.Application.Commands.Handlers
 
         public async Task Handle(TransferFunds command, CancellationToken cancellationToken)
         {
-            var (fromWalletId, toWalletId, amount) = command;
-
             var fromBankingAccount = await _bankingAccountRepository.GetAsync(command.FromBankingAccount)
                 ?? throw new BankingAccountNotFoundException(command.FromBankingAccount);
 
-            var toBankingAccount = await _bankingAccountRepository.GetAsync(toWalletId)
+            var toBankingAccount = await _bankingAccountRepository.GetAsync(command.ToBankingAccount)
                 ?? throw new BankingAccountNotFoundException(command.ToBankingAccount);
 
-            fromBankingAccount.TransferFunds(toBankingAccount, amount, _clock.CurrentDate());
+            fromBankingAccount.TransferFunds(toBankingAccount, command.Amount, _clock.CurrentDate());
 
-            await _bankingAccountRepository.UpdateAsync(fromBankingAccount);
-            await _bankingAccountRepository.UpdateAsync(toBankingAccount);
+            _bankingAccountRepository.Update(fromBankingAccount);
+            _bankingAccountRepository.Update(toBankingAccount);
         }
     }
 }
