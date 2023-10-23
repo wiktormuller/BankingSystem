@@ -1,5 +1,4 @@
-
-#  Banking System - REST  API application
+# Banking System - REST  API application
 
 This  is  simple and dockerized REST  API  application  implementing  Banking  System.
 
@@ -27,4 +26,3 @@ To test the REST API you can use the `BankingSystem.http` file from the solution
 
 ### Swagger Documentation
 The documentation based on OpenAPI is available under this endpoint - `https://localhost:7101/swagger/index.html`
-
