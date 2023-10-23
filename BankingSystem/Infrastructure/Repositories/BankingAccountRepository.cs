@@ -52,7 +52,7 @@ namespace BankingSystem.Infrastructure.Repositories
                 _context.Entry(outgoingTransfer).State = EntityState.Added;
             }
 
-            _context.ChangeTracker.DetectChanges();
+            _context.ChangeTracker.DetectChanges(); // _context>ChangeTracker>DebugView>LongView
             _bankingAccounts.Update(bankingAccount);
         }
     }
